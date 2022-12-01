@@ -24,10 +24,17 @@
         />
         <span
           *ngIf="
-            !cvForm.get('firstName')?.valid && cvForm.get('firstName')?.touched
+            !cvForm.get('firstName')?.valid &&
+            cvForm.get('firstName')?.touched &&
+            !cvForm.get('firstName')?.dirty
           "
           class="text-red-600 ml-2"
-          >This form must not be empty</span
+          >This field must not be empty</span
+        >
+        <span
+          *ngIf="cvForm.get('firstName')?.errors?.['minlength']"
+          class="text-red-600 ml-2"
+          >This field must include at least two characters</span
         >
       </div>
       <div class="w-full md:w-1/2 px-3">
@@ -49,7 +56,7 @@
             !cvForm.get('lastName')?.valid && cvForm.get('lastName')?.touched
           "
           class="text-red-600 ml-2"
-          >This form must not be empty</span
+          >This field must include at least one character</span
         >
       </div>
     </div>
@@ -69,9 +76,18 @@
       formControlName="email"
     />
     <span
-      *ngIf="!cvForm.get('email')?.valid && cvForm.get('email')?.touched"
+      *ngIf="
+        !cvForm.get('email')?.valid &&
+        cvForm.get('email')?.touched &&
+        !cvForm.get('email')?.dirty
+      "
       class="text-red-600 ml-2"
-      >This form must not be empty</span
+      >This form cannot be empty</span
+    >
+    <span
+      *ngIf="cvForm.get('email')?.errors?.['pattern']"
+      class="text-red-600 ml-2"
+      >Please, input a valid email address</span
     >
 
     <label
@@ -87,6 +103,37 @@
       placeholder="+995 555 55 55 55"
       formControlName="phone"
     />
+    <p
+      *ngIf="cvForm.get('phone')?.errors?.['pattern']
+      "
+      class="text-red-600 ml-2"
+    >
+      Please, enter a valid number
+    </p>
+    <p
+      *ngIf="cvForm.get('phone')?.errors?.['minlength']
+      "
+      class="text-red-600 ml-2"
+    >
+      Characters cannot be less than 9
+    </p>
+    <p
+      *ngIf="cvForm.get('phone')?.errors?.['maxlength']
+      "
+      class="text-red-600 ml-2"
+    >
+      Characters cannot be more than 12
+    </p>
+    <p
+      *ngIf="
+        !cvForm.get('phone')?.valid &&
+        cvForm.get('phone')?.touched &&
+        !cvForm.get('phone')?.dirty
+      "
+      class="text-red-600 ml-2"
+    >
+      This form cannot be empty
+    </p>
 
     <p class="text-xl mb-2 mt-8">Resources</p>
     <hr class="mb-5" />
@@ -106,6 +153,24 @@
           placeholder="https://github.com/yourName"
           formControlName="ghLink"
         />
+        <p
+          *ngIf="
+            !cvForm.get('ghLink')?.valid &&
+            cvForm.get('ghLink')?.touched &&
+            !cvForm.get('ghlink')?.dirty
+          "
+          class="text-red-600 ml-2"
+        >
+          This form cannot be empty
+        </p>
+        <p
+          *ngIf="
+            cvForm.get('ghLink')?.errors?.['pattern']
+          "
+          class="text-red-600 ml-2"
+        >
+          Please, enter a link to your github account
+        </p>
       </div>
       <div class="w-full md:w-1/2 px-3">
         <label
@@ -121,6 +186,25 @@
           placeholder="https://www.linkedin.com/in/yourProfile"
           formControlName="linkedIn"
         />
+
+        <p
+          *ngIf="
+            !cvForm.get('linkedIn')?.valid &&
+            cvForm.get('linkedIn')?.touched &&
+            !cvForm.get('linkedIn')?.dirty
+          "
+          class="text-red-600 ml-2"
+        >
+          This form cannot be empty
+        </p>
+        <p
+          *ngIf="
+            cvForm.get('linkedIn')?.errors?.['pattern']
+          "
+          class="text-red-600 ml-2"
+        >
+          Please, enter a link to your LinkeIn account
+        </p>
       </div>
     </div>
 
@@ -142,6 +226,16 @@
           placeholder="Company/business"
           formControlName="workPlace"
         />
+        <p
+          *ngIf="
+            !cvForm.get('workPlace')?.valid &&
+            cvForm.get('workPlace')?.touched &&
+            !cvForm.get('workPlace')?.dirty
+          "
+          class="text-red-600 ml-2"
+        >
+          This form cannot be empty
+        </p>
       </div>
       <div class="w-full md:w-1/4 px-3">
         <label
@@ -157,6 +251,17 @@
           placeholder="2019"
           formControlName="workStart"
         />
+
+        <p
+          *ngIf="
+            !cvForm.get('workStart')?.valid &&
+            cvForm.get('workStart')?.touched &&
+            !cvForm.get('workStart')?.dirty
+          "
+          class="text-red-600 ml-2"
+        >
+          This form cannot be empty
+        </p>
       </div>
 
       <div class="w-full md:w-1/4 px-3">
@@ -173,6 +278,16 @@
           placeholder="2021"
           formControlName="workEnd"
         />
+        <p
+          *ngIf="
+            !cvForm.get('workEnd')?.valid &&
+            cvForm.get('workEnd')?.touched &&
+            !cvForm.get('workEnd')?.dirty
+          "
+          class="text-red-600 ml-2"
+        >
+          This form cannot be empty
+        </p>
       </div>
     </div>
 
@@ -195,6 +310,16 @@
           placeholder="University/College"
           formControlName="institution"
         />
+        <p
+          *ngIf="
+            !cvForm.get('institution')?.valid &&
+            cvForm.get('institution')?.touched &&
+            !cvForm.get('institution')?.dirty
+          "
+          class="text-red-600 ml-2"
+        >
+          This form cannot be empty
+        </p>
       </div>
       <div class="w-full md:w-1/4 px-3">
         <label
@@ -208,6 +333,16 @@
           placeholder="2019"
           formControlName="eduStart"
         />
+        <p
+          *ngIf="
+            !cvForm.get('eduStart')?.valid &&
+            cvForm.get('eduStart')?.touched &&
+            !cvForm.get('eduStart')?.dirty
+          "
+          class="text-red-600 ml-2"
+        >
+          This form cannot be empty
+        </p>
       </div>
 
       <div class="w-full md:w-1/4 px-3">
@@ -223,12 +358,23 @@
           placeholder="2021"
           formControlName="eduEnd"
         />
+        <p
+          *ngIf="
+            !cvForm.get('eduEnd')?.valid &&
+            cvForm.get('eduEnd')?.touched &&
+            !cvForm.get('eduEnd')?.dirty
+          "
+          class="text-red-600 ml-2"
+        >
+          This form cannot be empty
+        </p>
       </div>
     </div>
     <div class="flex">
       <button
         type="submit"
         class="m-auto mt-5 mb-10 focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+        [disabled]="!cvForm.valid"
       >
         Submit
       </button>
